@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'game.dart';
 
 void main() {
   runApp(MyApp());
@@ -22,96 +26,137 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: '얼마나 먹니?',
+      title: '소주최대몇?',
       theme: ThemeData(
         primarySwatch: MaterialColor(0xFF073111, color),
       ),
-      home: MyHomePage(title: '얼마나 먹니?'),
+      home: mainPage(title: '소주최대몇??'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
+class mainPage extends StatefulWidget {
+  mainPage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _mainPageState createState() => _mainPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _mainPageState extends State<mainPage> {
   int _counter = 0;
 
-  void _incrementCounter() {
+  @override
+  void initState() {
+    super.initState();
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
+      _readData();
+    });
+  }
+
+  void _drink() {
+    setState(() {
       _counter++;
     });
+    _saveData();
+  }
+
+  void _minusOne() {
+    setState(() {
+      _counter--;
+    });
+    _saveData();
+  }
+
+  _saveData() async {
+    final prefs = await SharedPreferences.getInstance();
+    final key = 'counter';
+    final value = _counter;
+    prefs.setInt(key, value);
+  }
+
+  _readData() async {
+    final prefs = await SharedPreferences.getInstance();
+    final key = 'counter';
+    final value = prefs.getInt(key);
+    _counter = value ?? 0;
+    // print("read: ${_alarmCycle}");
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+            SizedBox(
+              width: 200,
+              height: 200,
+              child: Image.asset('assets/soju.png'),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                    alignment: Alignment.center,
+                    child: new SizedBox(
+                        child: FloatingActionButton(
+                      child: Text(
+                        "-1",
+                        style: TextStyle(
+                            color: Color(0xFF073111),
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      onPressed: _minusOne,
+                    ))),
+                SizedBox(
+                  width: 30,
+                ),
+                Text(
+                  _counter >= 8
+                      ? '${_counter ~/ 8}병 ${_counter % 8}잔'
+                      : '$_counter잔',
+                  style: Theme.of(context).textTheme.headline4,
+                ),
+                SizedBox(
+                  width: 30,
+                ),
+                Container(
+                    alignment: Alignment.center,
+                    child: new SizedBox(
+                        child: FloatingActionButton(
+                      child: Text(
+                        "+1",
+                        style: TextStyle(
+                            color: Color(0xFF073111),
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      onPressed: _drink,
+                    ))),
+              ],
             ),
+            SizedBox(
+              height: 30,
+            ),
+            OutlinedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Game()));
+                },
+                child: Text(
+                  "취했나 테스트",
+                  style: TextStyle(fontSize: 28),
+                ))
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
