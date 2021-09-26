@@ -1,6 +1,5 @@
 # 주량 카운터
 
-![IMG_8862](https://user-images.githubusercontent.com/66214527/134812134-b84a85a5-0694-4d83-b436-017e6fba8d9d.PNG)
 ![RPReplay_Final1632666499](https://user-images.githubusercontent.com/66214527/134812154-40a6c427-a70e-4d05-9d9b-a4aea8a26375.GIF)
 
 ## 메인 기능
