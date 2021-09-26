@@ -1,16 +1,30 @@
-# howdrink
+# 주량 카운터
 
-A new Flutter project.
+![IMG_8862](https://user-images.githubusercontent.com/66214527/134812134-b84a85a5-0694-4d83-b436-017e6fba8d9d.PNG)
+![RPReplay_Final1632666499](https://user-images.githubusercontent.com/66214527/134812154-40a6c427-a70e-4d05-9d9b-a4aea8a26375.GIF)
 
-## Getting Started
+## 메인 기능
+- 주량 카운터
+- 간단한 게임
+---
+## Android
+- [apk](https://github.com/manguuu/howdrink/blob/master/app-release.apk)
+파일을 다운로드하시면 사용할 수 있습니다.
+---
+## IOS
+### 1. flutter SDK 설치 
+- [flutter install](https://flutter.dev/docs/get-started/install)
 
-This project is a starting point for a Flutter application.
+### 2. 프로젝트 clone
+```
+git clone https://github.com/manguuu/howdrink
+```
 
-A few resources to get you started if this is your first Flutter project:
+### 3. 아이폰 pc와 연결 후 run
+```
+flutter run --release
+```
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+_cf) 애플 개발자 계정으로 xcode를 로그인해야 설치가 가능합니다._
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
