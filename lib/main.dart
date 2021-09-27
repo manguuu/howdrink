@@ -45,7 +45,7 @@ class mainPage extends StatefulWidget {
 }
 
 class _mainPageState extends State<mainPage> {
-  int _counter = 0;
+  static int _counter = 0;
 
   @override
   void initState() {
@@ -80,7 +80,9 @@ class _mainPageState extends State<mainPage> {
     final prefs = await SharedPreferences.getInstance();
     final key = 'counter';
     final value = prefs.getInt(key);
-    _counter = value ?? 0;
+    setState(() {
+      _counter = value ?? 0;
+    });
     // print("read: ${_alarmCycle}");
   }
 
