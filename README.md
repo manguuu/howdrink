@@ -24,6 +24,6 @@ git clone https://github.com/manguuu/howdrink
 flutter run --release
 ```
 
-_cf) 애플 개발자 계정으로 xcode를 로그인해야 설치가 가능합니다._
+_cf) 애플 개발자 계정으로 xcode를 로그인해야 설치가 가능하고 일주일이 지나면 사용할 수 없습니다._
 
 ---
