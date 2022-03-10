@@ -3,12 +3,12 @@
 ![RPReplay_Final1632666499](https://user-images.githubusercontent.com/66214527/134812154-40a6c427-a70e-4d05-9d9b-a4aea8a26375.GIF)
 
 ## 메인 기능
-- 주량 카운터
-- 간단한 게임
+- Drink counter
+- Simple game
 ---
 ## Android
 - [apk](https://github.com/manguuu/howdrink/blob/master/app-release.apk)
-파일을 다운로드하시면 사용할 수 있습니다.
+You can use it by downloading the APK file.
 ---
 ## IOS
 ### 1. flutter SDK 설치 
@@ -24,6 +24,6 @@ git clone https://github.com/manguuu/howdrink
 flutter run --release
 ```
 
-_cf) 애플 개발자 계정으로 xcode를 로그인해야 설치가 가능하고 일주일이 지나면 사용할 수 없습니다._
+_cf) You need to log in to xcode with your Apple developer account to install it and it will be unavailable after a week._
 
 ---
